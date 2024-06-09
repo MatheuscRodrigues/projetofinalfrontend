@@ -21,6 +21,10 @@ export const HeaderRestaurant = styled.div`
     font-size: 18px;
     font-weight: bold;
   }
+
+  img {
+    padding-left: 100px;
+  }
 `
 
 export const BannerContainer = styled.div`
