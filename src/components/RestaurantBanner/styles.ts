@@ -19,7 +19,7 @@ export const HeaderRestaurant = styled.div`
 
   p {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
   }
 
   img {
