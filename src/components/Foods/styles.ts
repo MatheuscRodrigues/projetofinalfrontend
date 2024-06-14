@@ -20,7 +20,7 @@ export const Title = styled.h2`
 `
 
 export const Text = styled.p`
-  margin-top: 16px;
+  margin-top: 8px;
   font-size: 14px;
   line-height: 22px;
   color: ${cores.bgFooter};
