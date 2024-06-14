@@ -14,13 +14,14 @@ export const ImgProduct = styled.img`
 `
 
 export const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 900;
   color: ${cores.bgFooter};
 `
 
 export const Text = styled.p`
-  margin: 16px 8px;
-  text-align: justify;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 22px;
   color: ${cores.bgFooter};
 `

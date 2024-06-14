@@ -15,7 +15,7 @@ const Foods = ({ image, title, text }: Props) => {
       <Text>{text}</Text>
       <Tag
         type="button"
-        use="restaurants"
+        use="product"
         bgColor="secondary"
         fontColor="secondary"
       >

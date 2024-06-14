@@ -13,18 +13,27 @@ export const ImgProduct = styled.img`
 `
 
 export const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 700;
 `
 export const Rating = styled.div`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 700;
 
   display: flex;
   max-width: 55px;
   width: 100%;
   align-items: top;
   justify-content: space-between;
+
+  p {
+    padding-right: 8px;
+  }
+
+  img {
+    width: 21px;
+    height: 20px;
+  }
 `
 
 export const TitleAndRating = styled.div`
@@ -33,8 +42,9 @@ export const TitleAndRating = styled.div`
   margin: 8px 8px 0 8px;
 `
 export const Text = styled.p`
-  margin: 16px 8px;
-  text-align: justify;
+  margin: 8px 8px;
+  font-size: 14px;
+  line-height: 22px;
 `
 export const Infos = styled.div`
   position: absolute;
