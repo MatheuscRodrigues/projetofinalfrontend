@@ -11,6 +11,8 @@ export const ContainerCard = styled.div`
 `
 export const ImgProduct = styled.img`
   width: 100%;
+  height: 167px;
+  object-fit: cover;
 `
 
 export const Title = styled.h2`

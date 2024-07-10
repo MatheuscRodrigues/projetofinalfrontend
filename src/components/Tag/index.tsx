@@ -5,10 +5,11 @@ export type Props = {
   use?: 'restaurants' | 'product'
   bgColor?: 'primary' | 'secondary'
   fontColor?: 'primary' | 'secondary'
-  children: string
+  children?: React.ReactNode
   onClick?: () => void
   type: 'button' | 'tag'
   to?: string
+  className?: string
 }
 
 const Tag = ({
@@ -19,7 +20,8 @@ const Tag = ({
   type,
   to,
   bgColor,
-  fontColor
+  fontColor,
+  className
 }: Props) => {
   if (type === 'button') {
     return (
@@ -28,9 +30,10 @@ const Tag = ({
         size={size}
         use={use}
         onClick={onClick}
-        to={to}
+        to={to as string}
         bgColor={bgColor}
         fontColor={fontColor}
+        className={className}
       >
         {children}
       </ButtonLink>
@@ -44,6 +47,7 @@ const Tag = ({
       use={use}
       bgColor={bgColor}
       fontColor={fontColor}
+      className={className}
     >
       {children}
     </ContainerTag>

@@ -7,9 +7,13 @@ export const ContainerCard = styled.div`
   border: 1px solid ${cores.bgSecondary};
   background-color: ${cores.bgWhite};
   position: relative;
+  display: flex;
+  flex-direction: column;
 `
 export const ImgProduct = styled.img`
   width: 100%;
+  height: 217px;
+  object-fit: cover;
 `
 
 export const Title = styled.h2`
@@ -45,9 +49,14 @@ export const Text = styled.p`
   margin: 8px 8px;
   font-size: 14px;
   line-height: 22px;
+  flex-grow: 1;
 `
 export const Infos = styled.div`
   position: absolute;
   top: 4px;
   right: 4px;
+`
+export const ButtonContainer = styled.div`
+  margin: 0;
+  align-self: flex-start;
 `

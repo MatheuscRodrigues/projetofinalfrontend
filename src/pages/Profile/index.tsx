@@ -1,52 +1,32 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import FoodList from '../../components/FoodList'
 import RestaurantBanner from '../../components/RestaurantBanner'
-import FoodsClass from '../../models/Foods'
-import pizza from '../../assets/images/pizza.png'
-
-const foodList: FoodsClass[] = [
-  {
-    id: 1,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 2,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 3,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 4,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 5,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 6,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    text: 'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  }
-]
+import { RestaurantsType } from '../Home/index'
 
 const Profile = () => {
+  const { id } = useParams<{ id: string }>()
+  const [restaurant, setRestaurant] = useState<RestaurantsType | null>(null)
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((data) => {
+        const foundRestaurant = data.find(
+          (rest: RestaurantsType) => rest.id === Number(id)
+        )
+        setRestaurant(foundRestaurant)
+      })
+  }, [id])
+
+  if (!restaurant) {
+    return <div>Loading...</div>
+  }
+
   return (
     <>
-      <RestaurantBanner />
-      <FoodList foodsType={foodList} />
+      <RestaurantBanner restaurant={restaurant} />
+      <FoodList key={restaurant.id} foodsType={restaurant.cardapio} />
     </>
   )
 }

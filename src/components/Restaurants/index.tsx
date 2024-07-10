@@ -5,48 +5,74 @@ import {
   TitleAndRating,
   Text,
   ImgProduct,
-  Infos
+  Infos,
+  ButtonContainer
 } from './styles'
 import star from '../../assets/images/estrela.svg'
 import Tag from '../Tag'
 
 type Props = {
-  image: string
-  title: string
-  text: string
-  infos: string[]
-  route: string
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  restaurantToLink: string
 }
 
-const Restaurants = ({ image, title, text, infos, route }: Props) => {
+const Restaurants = ({
+  capa,
+  titulo,
+  descricao,
+  tipo,
+  destacado,
+  avaliacao,
+  restaurantToLink
+}: Props) => {
   return (
     <ContainerCard>
-      <ImgProduct src={image} alt={image} />
+      <ImgProduct src={capa} alt={capa} />
       <Infos>
-        {infos.map((info) => (
-          <Tag
-            type="tag"
-            size="small"
-            key={info}
-            bgColor="primary"
-            fontColor="primary"
-            to={route}
-          >
-            {info}
-          </Tag>
-        ))}
+        {destacado ? (
+          <>
+            <Tag type="tag" size="small" bgColor="primary" fontColor="primary">
+              Destaque da semana
+            </Tag>
+          </>
+        ) : (
+          ''
+        )}
+
+        <Tag
+          type="tag"
+          size="small"
+          key={tipo}
+          bgColor="primary"
+          fontColor="primary"
+        >
+          {tipo}
+        </Tag>
       </Infos>
       <TitleAndRating>
-        <Title>{title}</Title>
+        <Title>{titulo}</Title>
         <Rating>
-          <p>4.9</p>
+          <p>{avaliacao}</p>
           <img src={star} />
         </Rating>
       </TitleAndRating>
-      <Text>{text}</Text>
-      <Tag type="button" bgColor="primary" to={route} fontColor="primary">
-        Saiba Mais
-      </Tag>
+      <Text>{descricao}</Text>
+      <ButtonContainer>
+        <Tag
+          type="button"
+          bgColor="primary"
+          fontColor="primary"
+          to={restaurantToLink}
+        >
+          Saiba Mais
+        </Tag>
+      </ButtonContainer>
     </ContainerCard>
   )
 }

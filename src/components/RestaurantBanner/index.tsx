@@ -1,16 +1,20 @@
-import bgImage from '../../assets/images/bg_image_restaurant.png'
 import {
   BannerContainer,
   HeaderRestaurant,
   RestaurantName,
   RestaurantType
 } from './styles'
-import heroImage from '../../assets/images/heroImage.png'
 import logo from '../../assets/images/logo.svg'
+import { RestaurantsType } from '../../pages/Home'
+import heroHeader from '../../assets/images/heroImage.png'
 
-const RestaurantBanner = () => (
+export type Props = {
+  restaurant: RestaurantsType
+}
+
+const RestaurantBanner = ({ restaurant }: Props) => (
   <>
-    <HeaderRestaurant style={{ backgroundImage: `url(${heroImage})` }}>
+    <HeaderRestaurant style={{ backgroundImage: `url(${heroHeader})` }}>
       <div className="container">
         <a href="/">
           <p>Restaurantes</p>
@@ -21,10 +25,10 @@ const RestaurantBanner = () => (
         <p>0 Produto(s) no carrinho</p>
       </div>
     </HeaderRestaurant>
-    <BannerContainer style={{ backgroundImage: `url(${bgImage})` }}>
+    <BannerContainer style={{ backgroundImage: `url(${restaurant.capa})` }}>
       <div className="container">
-        <RestaurantType>Italiana</RestaurantType>
-        <RestaurantName>La Dolce Vita Trattoria</RestaurantName>
+        <RestaurantType>{restaurant.tipo}</RestaurantType>
+        <RestaurantName>{restaurant.titulo}</RestaurantName>
       </div>
     </BannerContainer>
   </>

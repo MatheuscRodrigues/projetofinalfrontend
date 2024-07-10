@@ -2,24 +2,36 @@ import { ContainerCard, Title, Text, ImgProduct } from './styles'
 import Tag from '../Tag'
 
 type Props = {
-  image: string
-  title: string
-  text: string
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
+  onClick: () => void
 }
 
-const Foods = ({ image, title, text }: Props) => {
+export const reduceDescription = (description: string) => {
+  if (description.length > 128) {
+    return description.slice(0, 121) + '...'
+  }
+  return description
+}
+
+const Foods = ({ foto, nome, descricao, onClick }: Props) => {
   return (
     <ContainerCard>
-      <ImgProduct src={image} alt={image} />
-      <Title>{title}</Title>
-      <Text>{text}</Text>
+      <ImgProduct src={foto} alt={foto} />
+      <Title>{nome}</Title>
+      <Text>{reduceDescription(descricao)}</Text>
       <Tag
         type="button"
         use="product"
         bgColor="secondary"
         fontColor="secondary"
+        onClick={onClick}
       >
-        Adicionar ao Carrinho
+        Mais detalhes
       </Tag>
     </ContainerCard>
   )
