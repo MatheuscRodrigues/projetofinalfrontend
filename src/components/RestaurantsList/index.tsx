@@ -1,17 +1,16 @@
 import Restaurants from '../Restaurants'
 import { UlRestaurantList, ContainerList } from './styles'
-import { RestaurantsType } from '../../pages/Home/'
 
 export type Props = {
-  restaurantsType: RestaurantsType[]
+  restaurants: RestaurantsType[]
 }
 
-const RestaurantList = ({ restaurantsType }: Props) => {
+const RestaurantList = ({ restaurants }: Props) => {
   return (
     <div className="container">
       <ContainerList>
         <UlRestaurantList>
-          {restaurantsType.map((r) => (
+          {restaurants.map((r) => (
             <Restaurants
               key={r.id}
               capa={r.capa}

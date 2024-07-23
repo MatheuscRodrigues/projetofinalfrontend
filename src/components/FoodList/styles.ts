@@ -10,6 +10,14 @@ export const UlFoodList = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `
 export const Modal = styled.div`
   position: fixed;
@@ -43,6 +51,11 @@ export const ModalContent = styled.div`
   padding: 32px;
   display: flex;
 
+  @media (max-width: 768px) {
+    width: 80%;
+    display: grid;
+  }
+
   header {
     display: flex;
     justify-content: flex-end;
@@ -64,9 +77,18 @@ export const ProductContent = styled.div`
   padding-left: 24px;
   color: ${cores.bgWhite};
 
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
+
   h3 {
     font-size: 18px;
     font-weight: 900;
+
+    @media (max-width: 768px) {
+      padding-top: 12px;
+      text-align: center;
+    }
   }
 
   p {
@@ -74,9 +96,18 @@ export const ProductContent = styled.div`
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
+
+    @media (max-width: 768px) {
+      text-align: center;
+    }
   }
 
   .tag {
     margin: 0;
+
+    @media (max-width: 768px) {
+      display: flex;
+      justify-content: center;
+    }
   }
 `

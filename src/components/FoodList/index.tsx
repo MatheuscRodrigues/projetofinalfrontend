@@ -10,38 +10,47 @@ import Foods from '../Foods'
 import close from '../../assets/images/close.png'
 import Tag from '../Tag'
 import { useEffect, useState } from 'react'
-
-export type FoodItem = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao: string
-}
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
 
 export type Props = {
-  foodsType: FoodItem[]
+  foodsType: RestaurantsType
 }
 
 //Função de formatação de preço para Real Brasileiro
-const priceFormat = (price: number | undefined): string => {
+export const priceFormat = (price: number | undefined): string => {
   if (price === undefined) return ''
   return price.toFixed(2).replace('.', ',')
 }
 
 const FoodList = ({ foodsType }: Props) => {
   const [modalAberto, setModalAberto] = useState(false)
-  const [selectedFoodId, setSelectedFoodId] = useState(0)
+  const [selectedFoodId, setSelectedFoodId] = useState<
+    RestaurantsType['cardapio'][0] | null
+  >(null)
 
+  const dispatch = useDispatch()
+
+  //Função para adicionar o produto ao carrinho
+  const addToCart = () => {
+    dispatch(open())
+    if (selectedFoodId) {
+      dispatch(
+        add({
+          ...foodsType,
+          cardapio: [selectedFoodId]
+        })
+      )
+    }
+  }
   //Funções de abrir e fechar o modal
-  const handleOpenModal = (id: number) => {
+  const handleOpenModal = (food: RestaurantsType['cardapio'][0]) => {
     setModalAberto(true)
-    setSelectedFoodId(id)
+    setSelectedFoodId(food)
   }
   const handleCloseModal = () => {
     setModalAberto(false)
-    setSelectedFoodId(0)
+    setSelectedFoodId(null)
   }
 
   //Funções para fechar o modal ao pressionar esc no teclado
@@ -63,7 +72,7 @@ const FoodList = ({ foodsType }: Props) => {
       <div className="container">
         <ContainerList>
           <UlFoodList>
-            {foodsType.map((r) => (
+            {foodsType.cardapio.map((r) => (
               <Foods
                 key={r.id}
                 id={r.id}
@@ -72,7 +81,7 @@ const FoodList = ({ foodsType }: Props) => {
                 descricao={r.descricao}
                 porcao={r.porcao}
                 preco={r.preco}
-                onClick={() => handleOpenModal(r.id)} //Props atribuida dentro de Foods para a Tag (Botão)
+                onClick={() => handleOpenModal(r)} //Props atribuida dentro de Foods para a Tag (Botão)
               />
             ))}
           </UlFoodList>
@@ -84,28 +93,19 @@ const FoodList = ({ foodsType }: Props) => {
           <header>
             <img src={close} alt="Botão fechar" onClick={handleCloseModal} />
           </header>
-          <ProductImg
-            src={foodsType.find((item) => item.id === selectedFoodId)?.foto}
-            alt="Produto"
-          />
-          <ProductContent>
-            <h3>
-              {foodsType.find((item) => item.id === selectedFoodId)?.nome}
-            </h3>
-            <p>
-              {foodsType.find((item) => item.id === selectedFoodId)?.descricao}
-            </p>
-            <p>
-              Serve: de{' '}
-              {foodsType.find((item) => item.id === selectedFoodId)?.porcao}
-            </p>
-            <Tag type="button" className="tag">
-              Adicionar ao Carrinho - R$
-              {priceFormat(
-                foodsType.find((item) => item.id === selectedFoodId)?.preco
-              )}
-            </Tag>
-          </ProductContent>
+          {selectedFoodId && (
+            <>
+              <ProductImg src={selectedFoodId.foto} alt="Produto" />
+              <ProductContent>
+                <h3>{selectedFoodId.nome}</h3>
+                <p>{selectedFoodId.descricao}</p>
+                <p>Serve: de {selectedFoodId.porcao}</p>
+                <Tag type="button" className="tag" onClick={addToCart}>
+                  Adicionar ao Carrinho - R$ {priceFormat(selectedFoodId.preco)}
+                </Tag>
+              </ProductContent>
+            </>
+          )}
         </ModalContent>
         <div className="overlay" onClick={handleCloseModal}></div>
       </Modal>

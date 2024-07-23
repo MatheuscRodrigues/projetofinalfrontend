@@ -20,10 +20,19 @@ export const HeaderRestaurant = styled.div`
   p {
     font-size: 18px;
     font-weight: 900;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
 
   img {
     padding-left: 100px;
+
+    @media (max-width: 768px) {
+      padding: 0 30px;
+    }
   }
 `
 

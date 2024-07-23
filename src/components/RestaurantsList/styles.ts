@@ -9,4 +9,9 @@ export const UlRestaurantList = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 48px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-gap: 24px;
+  }
 `
