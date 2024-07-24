@@ -11,12 +11,11 @@ export const UlFoodList = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 32px;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `
 export const Modal = styled.div`

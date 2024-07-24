@@ -62,6 +62,10 @@ export const RestaurantType = styled.p`
   padding-top: 25px;
   padding-bottom: 157px;
   color: ${cores.bgWhite};
+
+  @media (max-width: 768px) {
+    padding-bottom: 120px;
+  }
 `
 export const RestaurantName = styled.h2`
   font-size: 32px;
