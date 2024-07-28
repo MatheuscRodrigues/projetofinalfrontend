@@ -25,9 +25,7 @@ export const priceFormat = (price: number | undefined): string => {
 
 const FoodList = ({ foodsType }: Props) => {
   const [modalAberto, setModalAberto] = useState(false)
-  const [selectedFoodId, setSelectedFoodId] = useState<
-    RestaurantsType['cardapio'][0] | null
-  >(null)
+  const [selectedFoodId, setSelectedFoodId] = useState<Foods | null>(null)
 
   const dispatch = useDispatch()
 
@@ -35,16 +33,11 @@ const FoodList = ({ foodsType }: Props) => {
   const addToCart = () => {
     dispatch(open())
     if (selectedFoodId) {
-      dispatch(
-        add({
-          ...foodsType,
-          cardapio: [selectedFoodId]
-        })
-      )
+      dispatch(add(selectedFoodId))
     }
   }
   //Funções de abrir e fechar o modal
-  const handleOpenModal = (food: RestaurantsType['cardapio'][0]) => {
+  const handleOpenModal = (food: Foods) => {
     setModalAberto(true)
     setSelectedFoodId(food)
   }

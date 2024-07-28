@@ -13,18 +13,14 @@ const Cart = () => {
     dispatch(close())
   }
 
-  const getTotalPrice = (items: RestaurantsType[]) => {
+  const getTotalPrice = () => {
     return items.reduce((total, atual) => {
-      const itemTotal = atual.cardapio.reduce(
-        (subTotal, cardapioAtual) => subTotal + cardapioAtual.preco,
-        0
-      )
-      return total + itemTotal
+      return (total += atual.preco)
     }, 0)
   }
 
-  const removeFromCart = (restaurantId: number, cardapioId: number) => {
-    dispatch(remove({ restaurantId, cardapioId }))
+  const removeFromCart = (id: number) => {
+    dispatch(remove(id))
   }
 
   return (
@@ -32,24 +28,19 @@ const Cart = () => {
       <Overlay onClick={closeCart} />
       <SideBar>
         <ul>
-          {items.map((item) =>
-            item.cardapio.map((cardapioItem) => (
-              <CartItem key={cardapioItem.id}>
-                <img src={cardapioItem.foto} alt="" />
-                <div>
-                  <h3>{cardapioItem.nome}</h3>
-                  <p>{priceFormat(cardapioItem.preco)}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => removeFromCart(item.id, cardapioItem.id)}
-                />
-              </CartItem>
-            ))
-          )}
+          {items.map((item) => (
+            <CartItem key={item.id}>
+              <img src={item.foto} alt="" />
+              <div>
+                <h3>{item.nome}</h3>
+                <p>{priceFormat(item.preco)}</p>
+              </div>
+              <button type="button" onClick={() => removeFromCart(item.id)} />
+            </CartItem>
+          ))}
         </ul>
         <TotalPrice>
-          Valor Total <span>{priceFormat(getTotalPrice(items))}</span>
+          Valor Total <span>{priceFormat(getTotalPrice())}</span>
         </TotalPrice>
         <Tag type="button" use="product">
           Continuar com a entrega
