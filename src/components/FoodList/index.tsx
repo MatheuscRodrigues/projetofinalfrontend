@@ -12,15 +12,10 @@ import Tag from '../Tag'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
+import { priceFormat } from '../../utils'
 
 export type Props = {
   foodsType: RestaurantsType
-}
-
-//Função de formatação de preço para Real Brasileiro
-export const priceFormat = (price: number | undefined): string => {
-  if (price === undefined) return ''
-  return price.toFixed(2).replace('.', ',')
 }
 
 const FoodList = ({ foodsType }: Props) => {
@@ -35,6 +30,9 @@ const FoodList = ({ foodsType }: Props) => {
     if (selectedFoodId) {
       dispatch(add(selectedFoodId))
     }
+    //Fecha modal apos incluir no carrinho
+    setModalAberto(false)
+    setSelectedFoodId(null)
   }
   //Funções de abrir e fechar o modal
   const handleOpenModal = (food: Foods) => {

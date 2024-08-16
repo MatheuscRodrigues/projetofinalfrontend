@@ -2,15 +2,26 @@ import { CartContainer, CartItem, Overlay, SideBar, TotalPrice } from './styles'
 import Tag from '../Tag'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
-import { priceFormat } from '../FoodList'
+import { close, remove, startCheckout } from '../../store/reducers/cart'
+import Checkout from '../Checkout'
+import { priceFormat } from '../../utils'
 
 const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const { isOpen, items, isAddress } = useSelector(
+    (state: RootReducer) => state.cart
+  )
   const dispatch = useDispatch()
 
   const closeCart = () => {
     dispatch(close())
+  }
+
+  const activeCheckout = () => {
+    if (getTotalPrice() > 0) {
+      dispatch(startCheckout())
+    } else {
+      alert('Não há itens no carrinho')
+    }
   }
 
   const getTotalPrice = () => {
@@ -42,9 +53,10 @@ const Cart = () => {
         <TotalPrice>
           Valor Total <span>{priceFormat(getTotalPrice())}</span>
         </TotalPrice>
-        <Tag type="button" use="product">
+        <Tag type="button" use="product" onClick={activeCheckout}>
           Continuar com a entrega
         </Tag>
+        <Checkout checkoutStart={isAddress} totalPrice={getTotalPrice()} />
       </SideBar>
     </CartContainer>
   )

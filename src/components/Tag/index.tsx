@@ -7,7 +7,7 @@ export type Props = {
   fontColor?: 'primary' | 'secondary'
   children?: React.ReactNode
   onClick?: () => void
-  type: 'button' | 'tag'
+  type: 'button' | 'tag' | 'submit'
   to?: string
   className?: string
 }
@@ -23,7 +23,7 @@ const Tag = ({
   fontColor,
   className
 }: Props) => {
-  if (type === 'button') {
+  if (type === 'button' || type === 'submit') {
     return (
       <ButtonLink
         type="button"
